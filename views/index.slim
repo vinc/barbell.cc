@@ -11,7 +11,7 @@ html ng-app="app"
     script src="/scripts/app.js"
   body
     h1 Barbell Standards
-    form ng-controller="AppCtrl"
+    form ng-controller="AppCtrl" ng-submit="save()"
       fieldset
         p
           label
@@ -52,3 +52,7 @@ html ng-app="app"
             .bar style="width:{{percent(#{lift})}}%"
               .value
                 | {{#{lift}.val()}}
+
+      fieldset
+        p
+          input type="submit" value="Save"
