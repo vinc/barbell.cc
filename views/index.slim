@@ -12,79 +12,81 @@ html ng-app="app"
   body
     h1 Barbell Standards
     form ng-controller="AppCtrl"
-      p
-        label
-          span
-            | Unit: 
-          select name="unit" ng-model="unit" ng-change="reload()"
-            option value="kg" selected="#{params['unit'] == 'kg'}" Metric
-            option value="lb" selected="#{params['unit'] == 'lb'}" Imperial
-      p
-        label
-          span
-            | Gender: 
-          select name="gender" ng-model="gender" ng-change="reload()"
-            option value="men" Male
-            option value="women" Female
-            option value="men" Other
-      p
-        label
-          span
-            | Weigth: 
-          input name="weigth" type="number" value="#{params['weigth']}" ng-model="weigth" ng-change="reload()"
-          |  {{unit}}
+      fieldset
+        p
+          label
+            span
+              | Unit: 
+            select name="unit" ng-model="unit" ng-change="reload()"
+              option value="kg" selected="#{params['unit'] == 'kg'}" Metric
+              option value="lb" selected="#{params['unit'] == 'lb'}" Imperial
+        p
+          label
+            span
+              | Gender: 
+            select name="gender" ng-model="gender" ng-change="reload()"
+              option value="men" Male
+              option value="women" Female
+              option value="men" Other
+        p
+          label
+            span
+              | Weigth: 
+            input name="weigth" type="number" value="#{params['weigth']}" ng-model="weigth" ng-change="reload()"
+            |  {{unit}}
 
-      p
-        label
-          span
-            | Squat: 
-          input name="squat" type="number" ng-model="squat.value"
-          |  {{unit}}
-      .chart
-        .bar style="width:{{percent(squat)}}%"
-          .value
-            | {{squat.value}}
+      fieldset
+        p
+          label
+            span
+              | Squat: 
+            input name="squat" type="number" ng-model="squat.value"
+            |  {{unit}}
+        .chart
+          .bar style="width:{{percent(squat)}}%"
+            .value
+              | {{squat.value}}
 
-      p
-        label
-          span
-            | Bench Press: 
-          input name="bench" type="number" ng-model="bench.value"
-          |  {{unit}}
-      .chart
-        .bar style="width:{{percent(bench)}}%"
-          .value
-            | {{bench.value}}
+        p
+          label
+            span
+              | Bench Press: 
+            input name="bench" type="number" ng-model="bench.value"
+            |  {{unit}}
+        .chart
+          .bar style="width:{{percent(bench)}}%"
+            .value
+              | {{bench.value}}
 
-      p
-        label
-          span
-            | Deadlift: 
-          input name="deadlift" type="number" ng-model="deadlift.value"
-          |  {{unit}}
-      .chart
-        .bar style="width:{{percent(deadlift)}}%"
-          .value
-            | {{deadlift.value}}
+        p
+          label
+            span
+              | Deadlift: 
+            input name="deadlift" type="number" ng-model="deadlift.value"
+            |  {{unit}}
+        .chart
+          .bar style="width:{{percent(deadlift)}}%"
+            .value
+              | {{deadlift.value}}
 
-      p
-        label
-          span
-            | Overhead Press: 
-          input name="press" type="number" ng-model="press.value"
-          |  {{unit}}
-      .chart
-        .bar style="width:{{percent(press)}}%"
-          .value
-            | {{press.value}}
+        p
+          label
+            span
+              | Overhead Press: 
+            input name="press" type="number" ng-model="press.value"
+            |  {{unit}}
+        .chart
+          .bar style="width:{{percent(press)}}%"
+            .value
+              | {{press.value}}
 
-      p
-        label
-          span
-            | Power Clean: 
-          input name="clean" type="number" ng-model="clean.value"
-          |  {{unit}}
-      .chart
-        .bar style="width:{{percent(clean)}}%"
-          .value
-            | {{clean.value}}
+        p
+          label
+            span
+              | Power Clean: 
+            input name="clean" type="number" ng-model="clean.value"
+            |  {{unit}}
+        .chart
+          .bar style="width:{{percent(clean)}}%"
+            .value
+              | {{clean.value}}
