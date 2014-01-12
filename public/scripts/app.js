@@ -5,6 +5,13 @@ app.config(function($locationProvider) {
 });
 
 app.controller('AppCtrl', function($scope, $http, $location) {
+  var liftPercent = function() {
+    var a = this.untrained;
+    var b = this.elite;
+    var v = this.val();
+    return Math.max(Math.min(-100 * (v - a) / (a - b), 100), 0);
+  };
+
   var liftValue = function() {
     var r = Math.max(this.reps, 1);
     var w = this.value;
@@ -23,13 +30,6 @@ app.controller('AppCtrl', function($scope, $http, $location) {
       localStorage.setItem(lift + ':reps', $scope[lift].reps);
       localStorage.setItem(lift + ':value', $scope[lift].value);
     });
-  };
-
-  $scope.percent = function(lift) {
-    if (typeof lift === 'undefined' || lift === null) {
-      return 0;
-    }
-    return Math.min(lift.val() * 100 / lift.elite, 100);
   };
 
   $scope.lifts = ['squat', 'bench', 'deadlift', 'press', 'clean'];
@@ -51,6 +51,7 @@ app.controller('AppCtrl', function($scope, $http, $location) {
     $scope[lift] = {
       reps: parseInt(localStorage.getItem(lift + ':reps'), 10) || 1,
       value: parseInt(localStorage.getItem(lift + ':value'), 10) || 0,
+      percent: liftPercent,
       val: liftValue
     };
   });
