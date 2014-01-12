@@ -24,11 +24,18 @@ get '/' do
   param('unit', String, in: ['kg', 'lb'], default: 'kg')
   param('gender', String, in: ['men', 'women'], default: 'men')
   param('weigth', Integer, default: 0)
-  param('squat', Integer, default: 0)
-  param('bench', Integer, default: 0)
-  param('deadlift', Integer, default: 0)
-  param('press', Integer, default: 0)
-  param('clean', Integer, default: 0)
+
+  @lifts = {
+    squat: 'Squat',
+    bench: 'Bench Press',
+    deadlift: 'Deadlift',
+    press: 'Overhead Press',
+    clean: 'Power Clean'
+  }
+
+  @lifts.keys.each do |l|
+    param(l.to_s, Integer, default: 0)
+  end
 
   slim :index
 end
