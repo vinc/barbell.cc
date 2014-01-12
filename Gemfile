@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+gem 'bacon'
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'sinatra-param'
+gem 'slim'

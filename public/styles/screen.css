@@ -1,0 +1,31 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0 auto;
+  max-width: 46em;
+}
+h1 {
+  font-family: "Bitter", sans-serif;
+  color: #555;
+}
+form {
+  margin: 1em 0;
+}
+.chart {
+  background: #eee;
+  height: 30px;
+  padding: 5px 0;
+  position: relative;
+  width: 100%;
+}
+.chart .bar {
+  background: dodgerblue;
+  box-sizing: border-box;
+  color: white;
+  font-size: 20px;
+  height: 100%;
+  line-height: 30px;
+  text-align: right;
+}
+.chart .bar .value {
+  padding: 0 5px;
+}

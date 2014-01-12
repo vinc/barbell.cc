@@ -1,0 +1,82 @@
+doctype html
+html ng-app="app"
+  head
+    meta charset="utf-8"
+    title Barbell Standards
+    meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    link href="//fonts.googleapis.com/css?family=Bitter|Open+Sans" rel="stylesheet" type="text/css"
+    link href="/styles/normalize.css" rel="stylesheet" type="text/css"
+    link href="/styles/screen.css" rel="stylesheet" type="text/css"
+    script src="/scripts/angular.min.js"
+    script src="/scripts/app.js"
+  body
+    h1 Barbell Standards
+    form ng-controller="AppCtrl"
+      p
+        label
+          | Unit: 
+          select name="unit" ng-model="unit" ng-change="reload()"
+            option value="kg" selected="#{params['unit'] == 'kg'}" Metric
+            option value="lb" selected="#{params['unit'] == 'lb'}" Imperial
+      p
+        label
+          | Gender: 
+          select name="gender" ng-model="gender" ng-change="reload()"
+            option value="men" Male
+            option value="women" Female
+            option value="men" Other
+      p
+        label
+          | Weigth: 
+          input name="weigth" type="number" value="#{params['weigth']}" ng-model="weigth" ng-change="reload()"
+          |  {{unit}}
+
+      p
+        label
+          | Squat: 
+          input name="squat" type="number" ng-model="squat.value"
+          |  {{unit}}
+      .chart
+        .bar style="width:{{percent(squat)}}%"
+          .value
+            | {{squat.value}}
+
+      p
+        label
+          | Bench Press: 
+          input name="bench" type="number" ng-model="bench.value"
+          |  {{unit}}
+      .chart
+        .bar style="width:{{percent(bench)}}%"
+          .value
+            | {{bench.value}}
+
+      p
+        label
+          | Deadlift: 
+          input name="deadlift" type="number" ng-model="deadlift.value"
+          |  {{unit}}
+      .chart
+        .bar style="width:{{percent(deadlift)}}%"
+          .value
+            | {{deadlift.value}}
+
+      p
+        label
+          | Over Head Press: 
+          input name="press" type="number" ng-model="press.value"
+          |  {{unit}}
+      .chart
+        .bar style="width:{{percent(press)}}%"
+          .value
+            | {{press.value}}
+
+      p
+        label
+          | Power Clean: 
+          input name="clean" type="number" ng-model="clean.value"
+          |  {{unit}}
+      .chart
+        .bar style="width:{{percent(clean)}}%"
+          .value
+            | {{clean.value}}
