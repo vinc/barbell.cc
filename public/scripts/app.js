@@ -5,6 +5,12 @@ app.config(function($locationProvider) {
 });
 
 app.controller('AppCtrl', function($scope, $http, $location) {
+  var liftValue = function() {
+    var r = Math.max(this.reps, 1);
+    var w = this.value;
+    return Math.round(w * 36 / (37 - r)); // Brzycki formula
+  };
+
   $scope.unit = $location.search().unit || 'kg';
   $scope.gender = $location.search().gender || 'men';
   $scope.weigth = parseInt($location.search().weigth, 10) || 0;
@@ -13,7 +19,7 @@ app.controller('AppCtrl', function($scope, $http, $location) {
     if (typeof lift === 'undefined' || lift === null) {
       return 0;
     }
-    return Math.min(lift.value * 100 / lift.elite, 100);
+    return Math.min(lift.val() * 100 / lift.elite, 100);
   }
 
   $scope.lifts = ['squat', 'bench', 'deadlift', 'press', 'clean'];
@@ -33,7 +39,9 @@ app.controller('AppCtrl', function($scope, $http, $location) {
 
   $scope.lifts.forEach(function(lift) {
     $scope[lift] = {
-      value: parseInt($location.search()[lift], 10) || 0
+      reps: 1,
+      value: parseInt($location.search()[lift], 10) || 0,
+      val: liftValue
     };
   });
   $scope.reload();
