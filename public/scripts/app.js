@@ -13,7 +13,7 @@ app.controller('AppCtrl', function($scope, $http, $location) {
     if (typeof lift === 'undefined' || lift === null) {
       return 0;
     }
-    return lift.value * 100 / lift.elite;
+    return Math.min(lift.value * 100 / lift.elite, 100);
   }
 
   $scope.lifts = ['squat', 'bench', 'deadlift', 'press', 'clean'];
