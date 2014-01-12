@@ -2,13 +2,32 @@ body {
   font-family: "Open Sans", sans-serif;
   margin: 0 auto;
   max-width: 46em;
+  color: #333;
 }
 h1 {
   font-family: "Bitter", sans-serif;
-  color: #555;
+  color: #666;
 }
 form {
   margin: 1em 0;
+}
+select, input {
+  background-color: white;
+  border: solid 1px #eee;
+  border-radius: 3px;
+  color: #333;
+  outline: none;
+  padding: 3px;
+}
+select:active,
+select:focus,
+input:active,
+input:focus {
+  box-shadow: 0 0 6px dodgerblue;
+}
+label span {
+  width: 10em;
+  display: inline-block;
 }
 .chart {
   background: #eee;
