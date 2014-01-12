@@ -19,6 +19,12 @@ select, input {
   outline: none;
   padding: 3px;
 }
+select {
+  width: 6em;
+}
+input[type=number] {
+  width: 3em;
+}
 select:active,
 select:focus,
 input:active,
