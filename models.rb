@@ -6,6 +6,10 @@ class Weigth
     @unit = matches[:unit] || 'kg'
     @weigth = matches[:weigth].to_i
   end
+
+  def to_hash
+    { weigth: @weigth, unit: @unit }
+  end
 end
 
 class User < Weigth
@@ -13,6 +17,10 @@ class User < Weigth
 
   def initialize(gender)
     @gender = gender
+  end
+
+  def to_hash
+    super.merge(gender: @gender)
   end
 end
 
@@ -29,6 +37,10 @@ class Lift < Weigth
 
   def initialize(name)
     @name = name
+  end
+
+  def to_hash
+    super.merge(name: @name)
   end
 
   def standards(user)
