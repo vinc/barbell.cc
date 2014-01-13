@@ -35,15 +35,15 @@ app.controller('AppCtrl', function($scope, $http, $location) {
   $scope.lifts = ['squat', 'bench', 'deadlift', 'press', 'clean'];
 
   $scope.reload = function() {
-    $scope.lifts.forEach(function(lift) {
-      var gender = $scope.gender;
-      var weigth = $scope.weigth + $scope.unit;
-      var url = '/api/std/' + gender + '/' + weigth + '/' + lift  + '.json';
-      $http.get(url).success(function(data) {
-        for (k in data) {
-          $scope[lift][k] = data[k];
+    var gender = $scope.gender;
+    var weigth = $scope.weigth + $scope.unit;
+    var url = '/api/std/' + gender + '/' + weigth + '/lifts.json';
+    $http.get(url).success(function(lifts) {
+      for (lift in lifts) {
+        for (k in lifts[lift]) {
+          $scope[lift][k] = lifts[lift][k];
         }
-      });
+      };
     });
   };
 

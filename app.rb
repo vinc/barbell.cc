@@ -11,13 +11,24 @@ configure do
   Lift.db = YAML.load(open('./db.yml'))
 end
 
-get '/api/std/:user_gender/:user_weigth/:lift_name.json' do
+before '*.json' do
   content_type(:json)
+end
+
+before '/api/std/:user_gender/:user_weigth/*' do
   @user = User.new(params['user_gender'])
   @user.parse_weigth(params['user_weigth'])
+end
 
-  @lift = Lift.new(params['lift_name'])
-  @lift.standards(@user).to_json
+get '/api/std/:user_gender/:user_weigth/lifts.json' do
+  Lift.all.reduce({}) do |hash, lift|
+    hash.merge(lift.name => lift.standards(@user))
+  end.to_json
+end
+
+get '/api/std/:user_gender/:user_weigth/lifts/:lift_name.json' do
+  lift = Lift.new(params['lift_name'])
+  lift.standards(@user).to_json
 end
 
 get '/' do

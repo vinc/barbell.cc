@@ -64,6 +64,15 @@ describe Lift do
     @lift.name.should.equal 'squat'
   end
 
+  describe 'Lift.all' do
+    it 'load all lifts' do
+      lifts = Lift.all
+      lifts.size.should.equal Lift.db.size
+      lifts.first.class.should.equal Lift
+      lifts.map(&:name).should.include 'squat'
+    end
+  end
+
   describe 'Lift.standards(user)' do
     before do
       @user = User.new('men')

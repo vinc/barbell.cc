@@ -23,6 +23,10 @@ class Lift < Weigth
     attr_accessor :db
   end
 
+  def self.all
+    Lift.db.keys.map { |name| Lift.new(name) }
+  end
+
   def initialize(name)
     @name = name
   end
