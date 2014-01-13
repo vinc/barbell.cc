@@ -1,6 +1,6 @@
 require 'bacon'
 
-require_relative 'app'
+require './app'
 
 shared Weigth do
   before do
