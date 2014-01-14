@@ -57,7 +57,7 @@ describe Lift do
 
   it 'has a global database' do
     Lift.db.should.not.be.nil?
-    Lift.db['squat']['men'][114][0].should.equal 80
+    Lift.db['squat']['std']['men'][114][0].should.equal 80
   end
 
   it 'has a name' do

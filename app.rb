@@ -17,6 +17,7 @@ end
 
 configure do
   Lift.db = YAML.load(open('./db.yml'))
+  set :slim, pretty: true
 end
 
 before '*.json' do
@@ -40,13 +41,7 @@ get '/api/std/:user_gender/:user_weigth/lifts/:lift_name.json' do
 end
 
 get '/std' do
-  @lifts = {
-    squat: 'Squat',
-    bench: 'Bench Press',
-    deadlift: 'Deadlift',
-    press: 'Overhead Press',
-    clean: 'Power Clean'
-  }
+  @lifts = Hash[Lift.db.map { |k, v| [k, v['name']] }]
 
   slim :index
 end
