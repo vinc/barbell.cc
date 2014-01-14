@@ -1,4 +1,6 @@
+require 'digest'
 require 'json'
+require 'redis'
 require 'sinatra'
 require 'sinatra/param'
 require 'sinatra/reloader' if development?
@@ -6,6 +8,12 @@ require 'slim'
 require 'yaml'
 
 require_relative 'models'
+
+helpers do
+  def redis
+    @redis ||= Redis.new
+  end
+end
 
 configure do
   Lift.db = YAML.load(open('./db.yml'))
@@ -31,11 +39,7 @@ get '/api/std/:user_gender/:user_weigth/lifts/:lift_name.json' do
   lift.standards(@user).to_json
 end
 
-get '/' do
-  param('unit', String, in: ['kg', 'lb'], default: 'kg')
-  param('gender', String, in: ['men', 'women'], default: 'men')
-  param('weigth', Integer, default: 0)
-
+get '/std' do
   @lifts = {
     squat: 'Squat',
     bench: 'Bench Press',
@@ -44,9 +48,31 @@ get '/' do
     clean: 'Power Clean'
   }
 
-  @lifts.keys.each do |l|
-    param(l.to_s, Integer, default: 0)
+  slim :index
+end
+
+post '/std' do
+  std = {}
+  param('unit', String, in: ['kg', 'lb'], default: 'kg')
+  param('gender', String, in: ['men', 'women'], default: 'men')
+  param('weigth', Integer, default: 0)
+  %w(unit gender weigth).each { |k| std[k] = params[k] }
+  Lift.db.keys.each do |lift|
+    param(lift, Integer, default: 0)
+    std[lift] = params[lift]
   end
 
-  slim :index
+  data = std.to_json
+  digest = Digest::SHA256.hexdigest(data)
+  id = ''
+  (2..(digest.length)).each do |i|
+    break if redis.setnx("std:#{id = digest[0..i]}", data)
+  end
+  redirect("/std/#{id}")  
+end
+
+get '/std/:id.json' do |id|
+  data = redis.get("std:#{id}")
+  halt(404) if data.nil?
+  data
 end
