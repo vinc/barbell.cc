@@ -18,8 +18,8 @@ html ng-app="app"
             span
               | Unit: 
             select name="unit" ng-model="unit" ng-change="reload()"
-              option value="kg" selected="#{params['unit'] == 'kg'}" Metric
-              option value="lb" selected="#{params['unit'] == 'lb'}" Imperial
+              option value="kg" selected="#{@values['unit'] == 'kg'}" Metric
+              option value="lb" selected="#{@values['unit'] == 'lb'}" Imperial
         p
           label
             span
@@ -32,7 +32,7 @@ html ng-app="app"
           label
             span
               | Weigth: 
-            input name="weigth" type="number" value="#{params['weigth']}" ng-model="weigth" ng-change="reload()"
+            input name="weigth" type="number" value="#{@values['weigth']}" ng-model="weigth" ng-change="reload()"
             |  {{unit}}
 
       fieldset
@@ -46,7 +46,7 @@ html ng-app="app"
             |  
             label
               | for 
-              input name="#{lift}[value]" type="number" ng-model="#{lift}.value"
+              input name="#{lift}[value]" type="number" value="#{@values[lift]}" ng-model="#{lift}.value"
               |  {{unit}}
           .chart
             .bar style="width:{{#{lift}.percent()}}%"

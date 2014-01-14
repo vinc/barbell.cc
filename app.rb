@@ -41,8 +41,8 @@ get '/api/std/:user_gender/:user_weigth/lifts/:lift_name.json' do
 end
 
 get '/std' do
+  # { 'squat' => 'Squat', 'bench' => 'Bench Press' }
   @lifts = Hash[Lift.db.map { |k, v| [k, v['name']] }]
-
   slim :index
 end
 
@@ -66,8 +66,15 @@ post '/std' do
   redirect("/std/#{id}")  
 end
 
-get '/std/:id.json' do |id|
+get '/std/:id.?:format?' do |id, format|
   data = redis.get("std:#{id}")
   halt(404) if data.nil?
-  data
+  if format == 'json'
+    data
+  else
+    # { 'squat' => 'Squat', 'bench' => 'Bench Press' }
+    @lifts = Hash[Lift.db.map { |k, v| [k, v['name']] }]
+    @values = JSON.parse(data)
+    slim :index
+  end
 end
