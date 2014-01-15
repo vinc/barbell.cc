@@ -11,7 +11,7 @@ html ng-app="app"
     script src="/scripts/app.js"
   body
     h1 Barbell Standards
-    form ng-controller="AppCtrl" ng-submit="save()"
+    form ng-controller="AppCtrl" ng-submit="save()" ng-cloak=""
       fieldset
         p
           label
@@ -41,12 +41,12 @@ html ng-app="app"
             span
               | #{label}: 
             label
-              input name="#{lift}[reps]" type="number" value="1" ng-model="#{lift}.reps"
+              input name="#{lift}[reps]" type="number" value="#{@values[lift]['reps']}" ng-model="#{lift}.reps"
               |  reps
             |  
             label
               | for 
-              input name="#{lift}[value]" type="number" value="#{@values[lift]}" ng-model="#{lift}.value"
+              input name="#{lift}[value]" type="number" value="#{@values[lift]['value']}" ng-model="#{lift}.value"
               |  {{unit}}
           .chart
             .bar style="width:{{#{lift}.percent()}}%"

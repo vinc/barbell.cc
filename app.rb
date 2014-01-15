@@ -41,8 +41,12 @@ get '/api/std/:user_gender/:user_weigth/lifts/:lift_name.json' do
 end
 
 get '/std' do
-  # { 'squat' => 'Squat', 'bench' => 'Bench Press' }
-  @lifts = Hash[Lift.db.map { |k, v| [k, v['name']] }]
+  @lifts = {}
+  @values = {}
+  Lift.db.map do |k, v|
+    @lifts[k] = v['name']
+    @values[k] = { 'reps' => 1, 'value' => 0 }
+  end
   slim :index
 end
 
@@ -53,17 +57,18 @@ post '/std' do
   param('weigth', Integer, default: 0)
   %w(unit gender weigth).each { |k| std[k] = params[k] }
   Lift.db.keys.each do |lift|
-    param(lift, Integer, default: 0)
+    param(lift, Hash, default: { 'reps' => 1, 'value' => 0 })
     std[lift] = params[lift]
   end
-
   data = std.to_json
   digest = Digest::SHA256.hexdigest(data)
-  id = ''
-  (2..(digest.length)).each do |i|
-    break if redis.setnx("std:#{id = digest[0..i]}", data)
+  id = (2..(digest.length)).reduce do |r, i|
+    r = digest[0..i]
+    k = "std:#{r}"
+    break r if redis.setnx(k, data) || redis.get(k) == data
   end
-  redirect("/std/#{id}")  
+  headers['Location'] = "/std/#{id}"
+  status(201)
 end
 
 get '/std/:id.?:format?' do |id, format|
