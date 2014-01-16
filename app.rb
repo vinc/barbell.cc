@@ -1,5 +1,8 @@
 require 'digest'
 require 'json'
+require 'rack'
+require 'rack/contrib'
+require 'rack/parser'
 require 'redis'
 require 'sinatra'
 require 'sinatra/param'
