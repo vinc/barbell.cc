@@ -38,13 +38,13 @@ app.controller('AppCtrl', function($scope, $http, $location) {
     if (path[1] == 'std' && path.length == 3) {
       $http.get('/std/' + path[2] + '.json').success(function(data) {
         var i, n;
-        $scope.unit = data['unit'];
-        $scope.gender = data['gender'];
-        $scope.weigth = data['weigth'];
+        $scope.unit = data.unit;
+        $scope.gender = data.gender;
+        $scope.weigth = data.weigth;
         for (i = 0, n = lifts.length; i < n; i++) {
           var lift = lifts[i];
-          $scope[lift]['reps'] = data[lift]['reps'];
-          $scope[lift]['value'] = data[lift]['value'];
+          $scope[lift].reps = data[lift].reps;
+          $scope[lift].value = data[lift].value;
         }
         $scope.refresh();
       });
