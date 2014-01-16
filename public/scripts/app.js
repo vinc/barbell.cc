@@ -48,6 +48,8 @@ app.controller('AppCtrl', function($scope, $http, $location) {
         }
         $scope.refresh();
       });
+    } else {
+      $scope.refresh();
     }
   }
 
@@ -77,7 +79,6 @@ app.controller('AppCtrl', function($scope, $http, $location) {
     $http.get(url).success(function(data) {
       for (lift in data) {
         $scope[lift]['std'] = data[lift];
-        console.log($scope[lift]);
       };
     });
   };
