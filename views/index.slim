@@ -4,7 +4,7 @@ html ng-app="app"
     meta charset="utf-8"
     title Barbell Standards
     meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-    link href="//fonts.googleapis.com/css?family=Bitter|Open+Sans" rel="stylesheet" type="text/css"
+    link href="//fonts.googleapis.com/css?family=Bitter|Open+Sans|Inconsolata" rel="stylesheet" type="text/css"
     link href="/styles/normalize.css" rel="stylesheet" type="text/css"
     link href="/styles/screen.css" rel="stylesheet" type="text/css"
     script src="/scripts/angular.min.js"
@@ -37,25 +37,26 @@ html ng-app="app"
 
       fieldset
         - for lift, label in @lifts
-          p
-            span
-              | #{label}: 
-            label
-              input name="#{lift}[reps]" type="number" value="#{@values[lift]['reps']}" ng-model="#{lift}.reps"
-              |  reps
-            |  
-            label
-              | for 
-              input name="#{lift}[value]" type="number" value="#{@values[lift]['value']}" ng-model="#{lift}.value"
-              |  {{unit}}
-          .chart
-            .bar style="width:{{#{lift}.percent(#{lift}.val())}}%"
-              .value
-                | {{#{lift}.val()}}
-                .marker ng-repeat="(level, value) in #{lift}.std" style="left:{{#{lift}.percent(value)}}%" class="{{level}}"
-                  p style="display:none"
-                    | {{level}}: {{value}} {{unit}}
+          .lift
+            p
+              span
+                | #{label}: 
+              label
+                input name="#{lift}[reps]" type="number" value="#{@values[lift]['reps']}" ng-model="#{lift}.reps"
+                |  reps
+              |  
+              label
+                | for 
+                input name="#{lift}[value]" type="number" value="#{@values[lift]['value']}" ng-model="#{lift}.value"
+                |  {{unit}}
+            .chart
+              .bar style="width:{{#{lift}.percent(#{lift}.val())}}%"
+                .value
+                  | {{#{lift}.val()}}
+              .marker ng-repeat="(level, value) in #{lift}.std" style="left:{{#{lift}.percent(value)}}%" class="{{level}}"
+                .label
+                  | {{value}}
 
       fieldset
-        p
+        p.button
           input type="submit" value="Save"

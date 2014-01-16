@@ -7,21 +7,22 @@ body {
 h1 {
   font-family: "Bitter", sans-serif;
   color: #666;
+  text-align: center;
 }
 form {
   margin: 1em 0;
 }
 fieldset {
   border: none;
-  margin: 0;
+  margin: 1em 0;
   padding: 0;
-}
-fieldset + fieldset {
-  padding-top: 1em;
 }
 fieldset p span {
   width: 10em;
   display: inline-block;
+}
+p.button {
+  text-align: center;
 }
 select, input {
   background-color: white;
@@ -49,6 +50,7 @@ input:focus {
   padding: 5px 0;
   position: relative;
   width: 100%;
+  font-family: 'Inconsolata', monospace;
 }
 .chart .bar {
   background: dodgerblue;
@@ -64,7 +66,17 @@ input:focus {
 }
 .chart .marker {
   height: 100%;
-  border-left: solid 2px rgba(1, 1, 1, 0.2);
+  border-left: solid 2px rgba(1, 1, 1, 0.15);
   position: absolute;
   top: 0;
+}
+.chart .marker .label {
+  color: #ccc;
+  font-size: 1.1em;
+  margin: 45px -25px;
+  text-align: center;
+  width: 50px;
+}
+.lift {
+  margin: 4em 0;
 }
