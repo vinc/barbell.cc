@@ -50,8 +50,11 @@ class Lift < Weigth
     raise 'No weigth unit provided' if unit.nil?
     scores = %w(untrained novice intermediate advanced elite)
     Lift.db[@name]['std'][user.gender].each do |category, values|
+      if unit == 'kg'
+        category = (category / 2.2).to_i
+        values = values.map { |v| (v / 2.2).to_i }
+      end
       next if user.weigth > category
-      values = values.map { |v| (v / 2.2).to_i } if unit == 'kg'
       return Hash[scores.zip(values)]
     end
   end
