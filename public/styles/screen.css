@@ -62,3 +62,9 @@ input:focus {
 .chart .bar .value {
   padding: 0 5px;
 }
+.chart .marker {
+  height: 100%;
+  border-left: solid 2px rgba(1, 1, 1, 0.2);
+  position: absolute;
+  top: 0;
+}

@@ -6,10 +6,12 @@ app.config(function($locationProvider) {
 
 app.controller('AppCtrl', function($scope, $http, $location) {
   var lifts = ['squat', 'bench', 'deadlift', 'press', 'clean'];
-  var liftPercent = function() {
-    var a = this.untrained;
-    var b = this.elite;
-    var v = this.val();
+  var liftPercent = function(v) {
+    if (this.std == null) {
+        return 0;
+    }
+    var a = this.std.untrained;
+    var b = this.std.elite;
     return Math.max(Math.min(-100 * (v - a) / (a - b), 100), 0);
   };
   var liftValue = function() {
@@ -74,9 +76,8 @@ app.controller('AppCtrl', function($scope, $http, $location) {
     var url = '/api/std/' + gender + '/' + weigth + '/lifts.json';
     $http.get(url).success(function(data) {
       for (lift in data) {
-        for (k in data[lift]) {
-          $scope[lift][k] = data[lift][k];
-        }
+        $scope[lift]['std'] = data[lift];
+        console.log($scope[lift]);
       };
     });
   };

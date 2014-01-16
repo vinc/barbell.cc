@@ -49,9 +49,12 @@ html ng-app="app"
               input name="#{lift}[value]" type="number" value="#{@values[lift]['value']}" ng-model="#{lift}.value"
               |  {{unit}}
           .chart
-            .bar style="width:{{#{lift}.percent()}}%"
+            .bar style="width:{{#{lift}.percent(#{lift}.val())}}%"
               .value
                 | {{#{lift}.val()}}
+                .marker ng-repeat="(level, value) in #{lift}.std" style="left:{{#{lift}.percent(value)}}%" class="{{level}}"
+                  p style="display:none"
+                    | {{level}}: {{value}} {{unit}}
 
       fieldset
         p
