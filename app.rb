@@ -14,12 +14,16 @@ require_relative 'models'
 
 helpers do
   def redis
-    @redis ||= Redis.new
+    settings.redis
   end
 end
 
 configure do
   Lift.db = YAML.load(open('./db.yml'))
+
+  uri = URI.parse(ENV['REDISCLOUD_URL'] || 'localhost:6379')
+  set :redis, Redis.new(host: uri.host, port: uri.port, password: uri.password)
+
   set :slim, pretty: true
 end
 
