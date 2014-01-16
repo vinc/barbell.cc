@@ -17,14 +17,14 @@ html ng-app="app"
           label
             span
               | Unit: 
-            select name="unit" ng-model="unit" ng-change="reload()"
+            select name="unit" ng-model="unit" ng-change="refresh({ convert: true })"
               option value="kg" selected="#{@values['unit'] == 'kg'}" Metric
               option value="lb" selected="#{@values['unit'] == 'lb'}" Imperial
         p
           label
             span
               | Gender: 
-            select name="gender" ng-model="gender" ng-change="reload()"
+            select name="gender" ng-model="gender" ng-change="refresh()"
               option value="men" Male
               option value="women" Female
               option value="men" Other
@@ -32,7 +32,7 @@ html ng-app="app"
           label
             span
               | Weigth: 
-            input name="weigth" type="number" value="#{@values['weigth']}" ng-model="weigth" ng-change="reload()"
+            input name="weigth" type="number" value="#{@values['weigth']}" ng-model="weigth" ng-change="refresh()"
             |  {{unit}}
 
       fieldset

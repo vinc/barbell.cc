@@ -5,6 +5,7 @@ app.config(function($locationProvider) {
 });
 
 app.controller('AppCtrl', function($scope, $http, $location) {
+  var convert;
   var lifts = ['squat', 'bench', 'deadlift', 'press', 'clean'];
   var liftPercent = function(v) {
     if (this.std == null) {
@@ -72,13 +73,34 @@ app.controller('AppCtrl', function($scope, $http, $location) {
     });
   };
 
-  $scope.refresh = function() {
-    var gender = $scope.gender;
-    var weigth = $scope.weigth + $scope.unit;
-    var url = '/api/std/' + gender + '/' + weigth + '/lifts.json';
+  convert = function(value, unit) {
+    switch (unit) {
+    case 'kg':
+      return Math.round(value / 2.2);
+    case 'lb':
+      return Math.round(value * 2.2);
+    default:
+      return value;
+    }
+  };
+
+  $scope.refresh = function(options) {
+    var gender, weigth, url;
+
+    options = options || {};
+    if (options.convert) {
+      $scope.weigth = convert($scope.weigth, $scope.unit);
+    }
+
+    gender = $scope.gender;
+    weigth = $scope.weigth + $scope.unit;
+    url = '/api/std/' + gender + '/' + weigth + '/lifts.json';
     $http.get(url).success(function(data) {
       for (lift in data) {
-        $scope[lift]['std'] = data[lift];
+        $scope[lift].std = data[lift];
+        if (options.convert) {
+          $scope[lift].value = convert($scope[lift].value, $scope.unit);
+        }
       };
     });
   };
