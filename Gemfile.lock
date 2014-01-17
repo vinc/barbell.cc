@@ -14,6 +14,7 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     redis (3.0.6)
+    sass (3.2.10)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -41,6 +42,7 @@ DEPENDENCIES
   rack-contrib
   rack-parser
   redis
+  sass
   sinatra
   sinatra-contrib
   sinatra-param

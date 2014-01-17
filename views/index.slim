@@ -54,7 +54,7 @@ html ng-app="app"
                 .value
                   | {{#{lift}.val()}}
               .marker ng-repeat="(level, value) in #{lift}.std" style="left:{{#{lift}.percent(value)}}%" class="{{level}}"
-                .label
+                .value
                   | {{value}}
 
       fieldset

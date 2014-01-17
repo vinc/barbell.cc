@@ -1,0 +1,88 @@
+body {
+  color: #333;
+  font-family: "Open Sans", sans-serif;
+  margin: 0 auto;
+  max-width: 46em;
+}
+h1 {
+  color: #666;
+  font-family: "Bitter", sans-serif;
+  text-align: center;
+}
+form {
+  margin: 1em 0;
+  p {
+    span { // Labels
+      display: inline-block;
+      width: 10em;
+    }
+    &.button { // Save button
+      text-align: center;
+    }
+  }
+  fieldset {
+    border: none;
+    margin: 1em 0;
+    padding: 0;
+  }
+  input, select {
+    background-color: white;
+    border: solid 1px #eee;
+    border-radius: 3px;
+    color: #333;
+    outline: none;
+    padding: 3px;
+  }
+  input[type=number] {
+    width: 3em;
+  }
+  select {
+    width: 6em;
+  }
+  select:active,
+  select:focus,
+  input:active,
+  input:focus {
+    box-shadow: 0 0 6px dodgerblue;
+  }
+}
+.lift {
+  margin: 4em 0;
+}
+.chart {
+  $chart-height: 30px;
+
+  background: #eee;
+  font-family: 'Inconsolata', monospace;
+  height: $chart-height;
+  padding: 5px 0;
+  position: relative;
+  width: 100%;
+  .bar {
+    background: dodgerblue;
+    box-sizing: border-box;
+    color: white;
+    font-size: 20px;
+    height: 100%;
+    line-height: $chart-height;
+    text-align: right;
+    .value {
+      padding: 0 5px;
+    }
+  }
+  .marker {
+    border-left: solid 2px rgba(1, 1, 1, 0.15);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    .value {
+      $marker-value-width: 50px;
+
+      color: #ccc;
+      font-size: 1.1em;
+      margin: 45px (-$marker-value-width / 2);
+      text-align: center;
+      width: $marker-value-width;
+    }
+  }
+}

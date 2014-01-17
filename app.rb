@@ -4,6 +4,7 @@ require 'rack'
 require 'rack/contrib'
 require 'rack/parser'
 require 'redis'
+require 'sass'
 require 'sinatra'
 require 'sinatra/param'
 require 'sinatra/reloader' if development?
@@ -89,4 +90,8 @@ get '/std/:id.?:format?' do |id, format|
     @values = JSON.parse(data)
     slim :index
   end
+end
+
+get '/styles/screen.css' do
+  scss :screen
 end
