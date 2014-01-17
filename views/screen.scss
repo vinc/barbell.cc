@@ -6,7 +6,7 @@ body {
 }
 h1 {
   color: #666;
-  font-family: "Bitter", sans-serif;
+  font-family: "Bitter", serif;
   text-align: center;
 }
 form {
@@ -71,7 +71,7 @@ form {
     }
   }
   .marker {
-    border-left: solid 2px rgba(1, 1, 1, 0.15);
+    border-left: solid 2px rgba(0, 0, 0, 0.15);
     height: 100%;
     position: absolute;
     top: 0;
