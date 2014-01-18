@@ -32,6 +32,7 @@ form {
     color: #333;
     outline: none;
     padding: 3px;
+    transition: 0.25s;
   }
   input[type=number] {
     width: 3em;
@@ -66,6 +67,7 @@ form {
     height: 100%;
     line-height: $chart-height;
     text-align: right;
+    transition: 0.1s;
     .value {
       padding: 0 5px;
     }
